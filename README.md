@@ -159,7 +159,7 @@ public class SampleFsm : Fsm<SampleFsm>
 ```
 
 > [!NOTE]
-> `int`での管理がつらい場合は、`enum`を使って管理することも出来ます。
+> `int`での管理がつらい場合は、`enum`を使って管理することも出来ます(型レベルでは対応していません)。
 > 
 > ```csharp
 > public enum EventId
