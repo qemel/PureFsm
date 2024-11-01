@@ -16,7 +16,7 @@ PureFsmは、Unityで使える軽量なステートマシンライブラリで�
 その後Unity Package Managerで以下のURLを追加してください。
 
 ```
-https://github.com/qemel/PureFsm.git
+https://github.com/qemel/PureFsm.git?path=/src/PureFsm
 ```
 
 ### Overview
