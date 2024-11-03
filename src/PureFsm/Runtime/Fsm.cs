@@ -25,6 +25,11 @@ namespace PureFsm
         {
             foreach (var state in states) _states.Add(state);
         }
+        
+        /// <summary>
+        ///     現在のステート名
+        /// </summary>
+        public string CurrentStateName => _currentState.GetType().Name;
 
         /// <summary>
         ///     ステートの個数
