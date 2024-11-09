@@ -29,7 +29,7 @@ namespace PureFsm
         /// <summary>
         ///     現在のステート名
         /// </summary>
-        public string CurrentStateName => _currentState.GetType().Name;
+        public string CurrentStateName => _currentState == null ? "None" : _currentState.GetType().Name;
 
         /// <summary>
         ///     ステートの個数
