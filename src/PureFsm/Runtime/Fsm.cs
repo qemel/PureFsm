@@ -48,7 +48,6 @@ namespace PureFsm
 
         public void Dispose()
         {
-            _cts.Cancel();
             _cts.Dispose();
         }
 
