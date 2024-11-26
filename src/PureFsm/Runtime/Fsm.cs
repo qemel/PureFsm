@@ -48,7 +48,8 @@ namespace PureFsm
 
         public void Dispose()
         {
-            _cts?.Dispose();
+            _cts.Cancel();
+            _cts.Dispose();
         }
 
         public override string ToString()
