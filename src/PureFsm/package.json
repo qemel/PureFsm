@@ -1,7 +1,7 @@
 ﻿{
   "name"       : "com.qemel.purefsm",
   "displayName": "PureFsm",
-  "version"    : "1.0.2",
+  "version"    : "1.0.3",
   "unity"      : "2022.3",
   "description": "Very thin and simple Finite State Machine for Unity"
 }
