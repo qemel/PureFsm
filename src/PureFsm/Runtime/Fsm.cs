@@ -77,7 +77,6 @@ namespace PureFsm
         {
             _currentState = null;
             _cts.Cancel();
-            _cts.Dispose();
             _cts = new CancellationTokenSource();
         }
 
