@@ -17,6 +17,7 @@ namespace PureFsm
         const int CancelEventId = -1;
         readonly HashSet<IState<T>> _states = new();
         readonly Dictionary<int, Dictionary<IState<T>, IState<T>>> _transitions = new();
+        
         CancellationTokenSource _cts = new();
 
         IState<T> _currentState;
@@ -48,8 +49,8 @@ namespace PureFsm
 
         public void Dispose()
         {
-            _cts.Cancel();
-            _cts.Dispose();
+            _cts?.Cancel();
+            _cts?.Dispose();
         }
 
         public override string ToString()
@@ -76,8 +77,7 @@ namespace PureFsm
         public void Stop()
         {
             _currentState = null;
-            _cts.Cancel();
-            _cts = new CancellationTokenSource();
+            _cts?.Cancel();
         }
 
         /// <summary>
@@ -115,6 +115,9 @@ namespace PureFsm
         /// </summary>
         protected async UniTask Run<TState>() where TState : IState<T>
         {
+            using var cts = new CancellationTokenSource();
+            _cts = cts;
+            
             _currentState = _states.FirstOrDefault(x => x.GetType() == typeof(TState));
             if (_currentState == null) throw new InvalidOperationException("State not found");
 
@@ -132,13 +135,14 @@ namespace PureFsm
 
                 if (_transitions.ContainsKey(eventId) && _transitions[eventId].ContainsKey(_currentState))
                 {
-                    // 次の状態に遷移
                     var nextState = _transitions[eventId][_currentState];
                     _currentState = nextState;
                 }
 
                 await UniTask.Yield();
+                _cts.Token.ThrowIfCancellationRequested();
             }
         }
+
     }
 }
